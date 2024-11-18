@@ -394,16 +394,17 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p6pwi"]
-radius = 8.0
+radius = 6.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_p08x5")
 current_tool = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_ftb4f")
-animation = &"watering_left"
+animation = &"idle_front"
 autoplay = "idle_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
