@@ -1,7 +1,7 @@
 #First interactable component.
-#First use Case: the door must react opening and closing when player enters/exits is
+#First use Case: the door must react opening and closing when player enters/exits it
 
-#This component is on collision Layer 3 and Collision Mask 2( interacts with the player)
+#This component is on collision Layer 3 and Collision Mask 2 (interacts with the player)
 
 class_name InteractableComponent
 extends Area2D
