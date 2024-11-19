@@ -1,9 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://dar4x0afgtyrc"]
+[gd_scene load_steps=12 format=3 uid="uid://dar4x0afgtyrc"]
 
 [ext_resource type="Texture2D" uid="uid://r4mflumt8qnw" path="res://assets/objects/basic_grass_biom_things.png" id="1_7pnsh"]
 [ext_resource type="Script" path="res://scenes/objects/trees/small_tree.gd" id="2_1bxrv"]
 [ext_resource type="PackedScene" uid="uid://bjfj3v3468ftq" path="res://scenes/components/hurt_component.tscn" id="2_qabir"]
 [ext_resource type="PackedScene" uid="uid://btb4y06w2nt0k" path="res://scenes/components/damage_component.tscn" id="3_v5wu4"]
+[ext_resource type="Shader" path="res://scenes/objects/trees/tree_shake.gdshader" id="5_w5ft8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqlxf"]
+resource_local_to_scene = true
+shader = ExtResource("5_w5ft8")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 20.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_du3lf"]
 atlas = ExtResource("1_7pnsh")
@@ -15,7 +22,29 @@ radius = 4.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvq3b"]
 size = Vector2(10, 20)
 
+[sub_resource type="Shader" id="Shader_f2ptn"]
+code = "shader_type canvas_item;
+
+uniform float shake_intensity = 0.0;
+uniform float shake_speed = 20.0;
+
+void vertex() {
+	vec2 shake = vec2(0.0);
+	//Sprite sitting above X axis (negative Y)
+	if (VERTEX.y <0.0) {
+	shake.x = sin(TIME * shake_speed + VERTEX.y) * shake_intensity;
+	}
+
+	VERTEX.xy += shake;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k3nmu"]
+shader = SubResource("Shader_f2ptn")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 20.0
+
 [node name="SmallTree" type="Sprite2D"]
+material = SubResource("ShaderMaterial_sqlxf")
 position = Vector2(0, -12)
 texture = SubResource("AtlasTexture_du3lf")
 script = ExtResource("2_1bxrv")
@@ -28,6 +57,7 @@ position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_6rt3o")
 
 [node name="HurtComponent" parent="." instance=ExtResource("2_qabir")]
+tool = 1
 
 [node name="HurtComponentCollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
 position = Vector2(0, 2)
@@ -35,6 +65,7 @@ shape = SubResource("RectangleShape2D_vvq3b")
 debug_color = Color(0.904215, 0.206709, 0.56861, 0.42)
 
 [node name="DamageComponent" parent="." instance=ExtResource("3_v5wu4")]
+material = SubResource("ShaderMaterial_k3nmu")
 max_damage = 3
 
 [node name="Timer" type="Timer" parent="."]

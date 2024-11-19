@@ -11,6 +11,11 @@ func _ready() -> void:
 
 func on_hurt(hit_damage) -> void:
 	damage_component.apply_damage(hit_damage)
+
+	#Tutorial7: Shader created with basic code and modified here
+	material.set_shader_parameter("shake_intensity", 0.8)
+	await get_tree().create_timer(0.5).timeout
+	material.set_shader_parameter("shake_intensity", 0.0)
 	
 func on_max_damage_reached() -> void:
 	print("Max Damage reached")
@@ -19,6 +24,7 @@ func on_max_damage_reached() -> void:
 #Personally added timer so the tree falls when the axe comes down.
 #Before that, tree was dissapearing right after clicking the mouse and looked bad.
 func _on_timer_timeout() -> void:
+	#Call_deferred used when the render needs to happen in the next frame
 	call_deferred("add_log_scene")
 	queue_free()
 
