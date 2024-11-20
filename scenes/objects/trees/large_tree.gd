@@ -13,12 +13,11 @@ func on_hurt(hit_damage) -> void:
 	damage_component.apply_damage(hit_damage)
 	
 	#Tutorial7: Shader created with basic code and modified here
-	material.set_shader_parameter("shake_intensity", 0.8)
+	material.set_shader_parameter("shake_intensity", 1)
 	await get_tree().create_timer(0.5).timeout
 	material.set_shader_parameter("shake_intensity", 0.0)
 	
 func on_max_damage_reached() -> void:
-	print("Max Damage reached")
 	$Timer.start()
 
 #Personally added timer so the tree falls when the axe comes down.
