@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=4 uid="uid://s7r51lapto27"]
+[gd_scene load_steps=5 format=4 uid="uid://s7r51lapto27"]
 
 [ext_resource type="TileSet" uid="uid://dfcioge27i2tq" path="res://tilesets/game_tile_set.tres" id="1_iik42"]
+[ext_resource type="PackedScene" uid="uid://b7vaioa0tagsw" path="res://scenes/characters/chicken/chicken.tscn" id="2_dnj7h"]
 [ext_resource type="PackedScene" uid="uid://bempc3j6o6013" path="res://scenes/characters/player/player.tscn" id="2_x8k2y"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1jokg"]
+vertices = PackedVector2Array(344.859, 137.453, 365.062, 216.727, 314.18, 265.867, 268.172, 226.094, 222.117, 143.07, 263.078, 116.852)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(208.827, 139.716, 261.345, 106.105, 353.076, 129.213, 376.184, 219.894, 314.563, 279.414, 260.294, 232.498)])
 
 [node name="TestSceneNPCChicken" type="Node2D"]
 y_sort_enabled = true
@@ -30,3 +36,11 @@ tile_set = ExtResource("1_iik42")
 
 [node name="Player" parent="." instance=ExtResource("2_x8k2y")]
 position = Vector2(235, 230)
+
+[node name="Chickens" type="Node2D" parent="."]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chickens"]
+navigation_polygon = SubResource("NavigationPolygon_1jokg")
+
+[node name="Chicken" parent="Chickens" instance=ExtResource("2_dnj7h")]
+position = Vector2(258.684, 164.645)
