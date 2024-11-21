@@ -5,7 +5,6 @@ extends NodeState
 @export var hit_component_collision_shape: CollisionShape2D
 
 func _ready() -> void:
-	pass
 	hit_component_collision_shape.disabled = true
 	hit_component_collision_shape.position = Vector2(0, 0)
 
