@@ -3,18 +3,18 @@ extends NodeState
 @export var character: NonPlayableCharacter
 @export var animated_sprite_2d: AnimatedSprite2D
 @export var navigation_agent_2d: NavigationAgent2D
-@export var min_speed: float = 15
-@export var max_speed: float = 25
+@export var min_speed: float = 10
+@export var max_speed: float = 20
 
 var speed: float
 
 func _ready() -> void:
-	#Signal that detecs the necessity of compute safe_velocity and call our function
+	#Signal that detetcs the necessity of compute safe_velocity and call our function
 	navigation_agent_2d.velocity_computed.connect(on_safe_velocity_computed)
 	# Tutorial10: call_deferred (again) to call a function in the next frame
 	call_deferred("character_setup")
 
-# If this function is skipped, all chicken travel to the same point the first time.
+# If this function is skipped, all cows travel to the same point the first time.
 # We need to wait one extra frame for the agent on every chicken to work independently.
 func character_setup() -> void:
 	await get_tree().physics_frame

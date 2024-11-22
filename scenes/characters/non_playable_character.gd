@@ -1,4 +1,3 @@
-# Changes the number of walk cycles of NPCs so it looks more random (not just walking-standing-walking)
 class_name NonPlayableCharacter
 extends CharacterBody2D
 
