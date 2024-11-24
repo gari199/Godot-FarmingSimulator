@@ -404,7 +404,6 @@ radius = 3.0
 y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_p08x5")
-current_tool = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
@@ -417,6 +416,12 @@ frame_progress = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_p6pwi")
+
+[node name="HitComponent" parent="." instance=ExtResource("10_50854")]
+
+[node name="HitComponentCollisionShape2D" type="CollisionShape2D" parent="HitComponent"]
+shape = SubResource("CircleShape2D_3inqu")
+debug_color = Color(0.873762, 0.198679, 0.702431, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
 script = ExtResource("3_beycf")
@@ -448,10 +453,3 @@ script = ExtResource("9_qw1s0")
 player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 hit_component_collision_shape = NodePath("../../HitComponent/HitComponentCollisionShape2D")
-
-[node name="HitComponent" parent="." instance=ExtResource("10_50854")]
-current_tool = 2
-
-[node name="HitComponentCollisionShape2D" type="CollisionShape2D" parent="HitComponent"]
-shape = SubResource("CircleShape2D_3inqu")
-debug_color = Color(0.873762, 0.198679, 0.702431, 0.42)
